@@ -1,0 +1,77 @@
+{% extends 'base_layout.html' %}
+
+{% block header %}
+  {% block title %} {{ title }} {% endblock %}
+{% endblock %}
+
+
+{% block content %}
+	<!-- Adding our form into the add User page -->
+	<div class="content-section">
+		<form method='POST'>
+			<!-- Add a security check for the app form against external threats-->
+			{{ form.hidden_tag() }}
+				<fieldset class="form-group">
+					<legend class="border-bottom mb-4"> {{ title }} - To Perform Admin Task</legend>
+					<div class="form-group">
+						{{ form.username.label(class="form-control-label") }}
+
+						<!-- validations for the username field and errors-->
+						{% if form.username.errors %}
+							{{ form.username(class="form-control form-control-md is-invalid") }}
+							<div class="invalid-feedback">
+								{% for error in form.username.errors %}
+									<span> {{ error }} </span>
+								{% endfor %}
+							</div>
+						{% else %}
+							{{ form.username(class="form-control form-control-md") }}
+						{% endif %}
+
+						<small class="form-text text-muted"> 
+							After submit username cannot change.
+						</small>
+					</div>
+					<div class="form-group">
+						{{ form.password.label(class="form-control-label") }}
+
+						<!-- validations for password field and errors-->
+						{% if form.password.errors %}
+							{{ form.password(class="form-control form-control-md is-invalid") }}
+							<div class="invalid-feedback">
+								{% for error in form.password.errors %}
+									<span> {{ error }} </span>
+								{% endfor %}
+							</div>
+						{% else %}
+							{{ form.password(class="form-control form-control-md") }}
+						{% endif %}
+
+					</div>
+					<div class="form-group">
+						{{ form.confirm_password.label(class="form-control-label") }}
+
+						<!-- validations for confirm password field and errors-->
+						{% if form.confirm_password.errors %}
+							{{ form.confirm_password(class="form-control form-control-md is-invalid") }}
+							<div class="invalid-feedback">
+								{% for error in form.confirm_password.errors %}
+									<span> {{ error }} </span>
+								{% endfor %}
+							</div>
+						{% else %}
+							{{ form.confirm_password(class="form-control form-control-md") }}
+						{% endif %}
+
+					</div>
+				</fieldset>
+				<div class="form-group">
+					{{ form.submit(class="btn btn-outline-info")}}
+				</div>
+		</form>
+	</div>
+
+	<small class="form-text text-muted"> 
+		<span> You are about to create new database user who can update or delete students database. </span>
+	</small>
+{% endblock %}

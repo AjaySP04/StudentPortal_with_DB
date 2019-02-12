@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<!-- 
+	Created by : Ajay
+	Date : Febuary 10, 2019
+
+	Base layout for the application, This layout uses bootstrap to control all fields in the layout html. And will be extending using Jinja template to other templates in the application 
+-->
+
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!--  glyphicons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- custom style.css file loaded through url for static files-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- Jinja template:  used on title if title provided through view-->
+    {% if title %}
+      <title> Student - {{ title }} </title>
+    {% else %}
+       <!-- Jinja template:  used on title if title NOT provided through view-->
+      <title> Student - Application </title>
+    {% endif %}
+
+  </head>
+  <body>
+  	<header class="site-header">
+
+          <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+            <div class="container">
+
+              <a class="navbar-brand mr-4" href="{{ url_for('auth.login')}}">
+              	{% block header %}{% endblock %}  <!-- here will go the header with title for page-->
+              </a>
+
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+              	<span class="navbar-toggler-icon"></span>
+              </button>
+
+              <div class="collapse navbar-collapse" id="navbarToggle">
+                  <div class="navbar-nav mr-auto"></div>
+                
+                <!-- Navbar Right Side : This will be shown only if the user is logged in.-->
+                {% if g.user %} <!-- will use session key to check if user exists in session cookie-->
+                  <div class="navbar-nav mr-sm-2">
+                    <a class="nav-item nav-link" href="#">
+                    	<span> Welcome {{ g.user['username'] }}</span> <!-- display user greetings-->
+                    </a>
+                    <!-- Logout for the user to return to index page. -->
+                    <a class="nav-item nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
+                  </div>
+                {% endif %}
+              </div>
+
+            </div>
+          </nav> <!-- nav end -->
+    </header> <!-- header end -->
+
+
+    <!-- main container -->
+    <main role="main" class="container">
+		<!-- Flash will show all error messages -->
+		{% with messages = get_flashed_messages(with_categories=true) %}
+			{% if messages %}
+				{% for category, message in messages %}
+				   	<div class="alert alert-{{ category }}">{{ message }}</div>
+				{% endfor %}
+			{% endif %}
+		{% endwith %}
+		
+
+		<div class="row">
+			<div class="col-md-8">
+		        {% block content %}{% endblock %}
+			</div>
+
+		    <div class="col-md-4">
+		        <div class="content-section">
+		            <h3> Tools </h3>
+		            <p class='text-muted'>
+		            	{% if g.user %}
+		            		<span class="text text-muted">List of Admin tools</span>
+		            	{% else %}
+		            		<span class="text text-muted">Active only for Admin or Users</span>
+		            	{% endif%}
+
+		            <!-- Tools will use session user to check if user is present -->	
+		    	        {% if g.user %}
+		                    <ul class="list-group">
+		<!-- Add User to the user database they will have access to -->
+		                      <li class="list-group-item list-group-item-light">
+		                        <a href="{{ url_for('auth.adduser') }}">Add User</a>
+		                      </li>
+		<!-- List All the students in database, also main student page.-->
+		                      <li class="list-group-item list-group-item-light">
+		                        <a href="{{ url_for('student.index') }}"> Student Portal </a> 
+		                      </li>
+		<!-- Add student to the database -->
+		                      <li class="list-group-item list-group-item-light">
+		                        <a href="{{ url_for('student.create') }}"> Add Student </a> 
+		                      </li>  
+		                                       
+		                      <li class="list-group-item list-group-item-light">
+		<!-- search form for the student -->
+		                        <div class='search'>
+		                          <form method="get" action='/search' class="form-inline">
+		                            <input type="text" name="search" class="form-control" value="{{ request.form['search'] }}" placeholder="Search student...">
+		                            <button class="btn btn-info" type="submit"><i class="fa fa-search"></i></button>
+		                          </form>
+		                        </div>
+
+		                      </li>
+		                    </ul>
+		                {% endif %} 
+		            </p>
+		        </div>
+		    </div>
+		</div>
+	</main> <!-- main end -->
+
+
+	<!-- Included the bootstrap files -->
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>

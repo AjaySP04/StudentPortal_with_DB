@@ -1,0 +1,74 @@
+{% extends 'base_layout.html' %}
+
+{% block header %}
+  {% block title %} {{ title }} {% endblock %}
+{% endblock %}
+
+{% block content %}
+	<!-- Adding our form into the add User page -->
+	<div class="content-section">
+		<form method='POST'>
+			<!-- Add a security check for the app form against external threats-->
+			{{ form.hidden_tag() }}
+				<fieldset class="form-group">
+					<legend class="border-bottom mb-4"> {{ title }} - Enter Student Details</legend>
+					<div class="form-group">
+						{{ form.name.label(class="form-control-label") }}
+
+						<!-- validations for the name field and errors-->
+						{% if form.name.errors %}
+							{{ form.name(class="form-control form-control-md is-invalid") }}
+							<div class="invalid-feedback">
+								{% for error in form.name.errors %}
+									<span> {{ error }} </span>
+								{% endfor %}
+							</div>
+						{% else %}
+							{{ form.name(class="form-control form-control-md") }}
+						{% endif %}
+					</div>
+					<div class="form-group">
+						{{ form.age.label(class="form-control-label") }}
+
+						<!-- validations for age field and errors-->
+						{% if form.age.errors %}
+							{{ form.age(class="form-control form-control-md is-invalid") }}
+							<div class="invalid-feedback">
+								{% for error in form.age.errors %}
+									<span> {{ error }} </span>
+								{% endfor %}
+							</div>
+						{% else %}
+							{{ form.age(class="form-control form-control-md") }}
+						{% endif %}
+
+					</div>
+					<div class="form-group">
+						{{ form.gender.label(class="form-control-label") }}
+
+						<!-- validations for confirm password field and errors-->
+						{% if form.gender.errors %}
+							{{ form.gender(class="form-control form-control-md is-invalid") }}
+							<div class="invalid-feedback">
+								{% for error in form.gender.errors %}
+									<span> {{ error }} </span>
+								{% endfor %}
+							</div>
+						{% else %}
+							{{ form.gender(class="form-control form-control-md") }}
+						{% endif %}
+
+					</div>
+				</fieldset>
+				<div class="form-group">
+					{{ form.add(class="btn btn-outline-info")}}
+				</div>
+				<a href="{{ url_for('student.index') }}" class="btn btn-outline-danger"> Back </a>
+		</form>
+	</div>
+
+	<small class="form-text text-muted"> 
+		<span> You are about to create new student. </span>
+	</small>
+
+{% endblock content %}

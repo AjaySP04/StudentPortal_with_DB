@@ -1,0 +1,20 @@
+{% extends 'base_layout.html'%}
+
+{% block header %}
+	Test Student
+{% endblock header %}
+
+{% block content %}
+	<div id="header">
+		<h2> List of All Students </h2>
+	</div>
+	{% for student in students %}
+		<div id="main">
+			<p><strong> {{ student.name }}</strong> </p>
+			<p> Roll Number : {{ student.roll_number }} </p>
+			<p> Age : {{ student.age }}, Gender : {{ student.gender }}</p>
+		</div>
+		<hr>
+	{% endfor %}
+
+{% endblock content %}

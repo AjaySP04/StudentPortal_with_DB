@@ -1,0 +1,28 @@
+{% extends 'base_layout.html' %}
+
+{% block header %}
+  {% block title %}Students{% endblock %} 
+  {% if g.user %}
+ 
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+	<div class="list-group">
+		{% for student in students %}
+			<a href="{{ url_for('student.update', id=student['id']) }}" class="list-group-item">
+			    <h4 class="list-group-item-heading">{{ student['name'] }}</h4>
+			    <p class="list-group-item-text">
+			    	Roll Number : {{ student['roll_number'] }}
+			    </p>
+				<small class="form-text text-muted"> 
+					<a  href="{{ url_for('student.update', id=student['id']) }}"> Edit </a>
+				</small>
+			</a>
+			{% if not loop.last %}
+		      <hr>
+		    {% endif %}
+		{% endfor %}
+	</div>
+
+{% endblock %}
