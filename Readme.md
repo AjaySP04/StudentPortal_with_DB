@@ -1,4 +1,4 @@
-# Readme for Student Portal Web Application without any Database
+# Readme for Student Portal Web Application with Relational Database (SQLite)
 
 This project is part of an in-house assignment, and also a copy of the already existing Student Portal Application with an only difference 
 of the database use. This uses SQLite database for data management through an RDBMS and SQL.
