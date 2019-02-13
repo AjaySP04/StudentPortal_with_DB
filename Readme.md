@@ -55,7 +55,7 @@ of the database use. This uses SQLite database for data management through an RD
   'flask run'
   
   Output:
-  * Serving Flask app "student_nodb" (lazy loading)
+  * Serving Flask app "student_db" (lazy loading)
  * Environment: development
  * Debug mode: on
  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
