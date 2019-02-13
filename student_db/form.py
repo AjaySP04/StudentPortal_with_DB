@@ -5,6 +5,7 @@ from wtforms.validators import DataRequired, Length, EqualTo, NumberRange
 #from wtforms.widgets import NumberInput
 
 
+#: Form for adding user to user database.
 class AddUserForm(FlaskForm):
     username = StringField(
         'Username', validators=[
@@ -20,6 +21,7 @@ class AddUserForm(FlaskForm):
     submit = SubmitField('Save')
 
 
+#: Form for adding user to user database.
 class LoginForm(FlaskForm):
     username = StringField(
         'Username', validators=[
@@ -30,6 +32,7 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Login')
 
 
+#: Form to create/add Student to student application.
 class CreateStudentForm(FlaskForm):
     name = StringField(
         'Username', validators=[
@@ -45,10 +48,11 @@ class CreateStudentForm(FlaskForm):
                 message='age')])
     gender = SelectField(
         'Gender', choices=[
-            ('male', 'Male'), ('female', 'Female')])
+            ('Male', 'Male'), ('Female', 'Female')])
     add = SubmitField('Add')
 
 
+#: Form to update the student details - similar to create form.
 class UpdateStudentForm(FlaskForm):
     roll_number = StringField('Roll Number', validators=[DataRequired()])
     name = StringField(
@@ -65,6 +69,6 @@ class UpdateStudentForm(FlaskForm):
                 message='age')])
     gender = SelectField(
         'Gender', choices=[
-            ('male', 'Male'), ('female', 'Female')])
+            ('Male', 'Male'), ('Female', 'Female')])
     save = SubmitField('Save')
     delete = SubmitField('Delete')

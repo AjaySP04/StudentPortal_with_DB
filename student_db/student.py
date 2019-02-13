@@ -51,6 +51,7 @@ def index():
         students=students)
 
 
+#: create or add student to database
 @bp.route('/create', methods=('GET', 'POST'))
 @login_required
 def create():
@@ -117,6 +118,7 @@ def update(id):
         student=student)
 
 
+#: delete student from the database for specific id
 @bp.route('/delete/<int:id>', methods=('POST',))
 @login_required
 def delete(id):
@@ -130,6 +132,7 @@ def delete(id):
     return redirect(url_for('student.index'))
 
 
+#: search for name pattern and return the matched results
 @bp.route('/search', methods=('GET', 'POST'))
 @login_required
 def search():

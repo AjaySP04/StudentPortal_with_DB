@@ -1,57 +1,46 @@
-from .form import AddUserForm, LoginForm
-from werkzeug.security import check_password_hash, generate_password_hash
+from .form import AddUserForm, LoginForm  #: import user forms
+# from importing all neccessary methods for user actions and login.
 from .data import validate_login, add_user_data
+#: import all required dependencies from flask.
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
+#: security features for password protection using hashing.
+from werkzeug.security import check_password_hash, generate_password_hash
+#: To add the functool to create login required decorators.
 import functools
-'''
-	Created By: Ajay
-	Date: Febuary 10, 2019
-'''
 
 '''
-	This module is used to authenticate the user and will deal with registering or login to
-	Application.
-	Main Processes :
-	1. Admin can add the user with register view and its templates
-	2. Login the existing use into the system.
-	3. Will Also provide functinality to check if user is login or not
-	4. Logout for the existing user.
+Created By: Ajay
+Date: Febuary 10, 2019
 
-	We will be registering this blueprints for this app to provide controllers for the app
+This module is used to authenticate the user and will deal with registering or login to
+Application.
+Main Processes :
+1. Admin can add the user with register view and its templates
+2. Login the existing use into the system.
+3. Will Also provide functinality to check if user is login or not
+4. Logout for the existing user.
+
+We will be registering this blueprints for this app to provide controllers for the app.
 '''
 
-#: To add the functool that provide ability to create decorators to check login for the user
-
-
-# from importing all neccessary mthods for user actions and login
-
-#: security features for password protection
-
-#: import all the user related model form into the auth to authenticate the user.
-
+#: create blueprint for auth app.
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
-'''
-	All imports and dependencies are loaded to the module auth.
-	Below will be the start of the views. We basically have 3 views: AddUser, Login and logout.
-'''
 
-#: login view for the user admin who will be end user of this application.
-#: It will authenticate the user and add it in session cookie of browser.
+#: Below will be the start of the views. We basically have 3 views: AddUser, Login and logout.
+#: login view for auth/login.
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
         # validate the user in the database
-        if validate_login(
-                username=form.username.data,
-                password=form.password.data):
+        if validate_login(username=form.username.data,
+                          password=form.password.data):
             #: for login success
             session.clear()
             session['user_id'] = form.username.data
-
             flash(
                 f'Welcome {form.username.data}, You are logged in.',
                 'success')
@@ -65,9 +54,7 @@ def login():
 
     return render_template('auth/login.html', title='Admin Login', form=form)
 
-#: check if the user if present in session cookie
-#: if yes then set the g.user to userid otherwise to None
-#: this will load before everything in auth module.
+#: check for user logged in using session cookie.
 @bp.before_app_request
 def load_logged_in_user():
     user_id = session.get('user_id')
@@ -78,8 +65,7 @@ def load_logged_in_user():
         g.user = 'admin'
 
 
-#: below method is made from functools used to check if the user is logged
-#: and can be used as decorator before every previleged task.
+#: login
 def login_required(view):
     # : functools used here to create it as decorator wrapper
     @functools.wraps(view)
@@ -91,8 +77,8 @@ def login_required(view):
     #: return a wrapper for this method as decorator.
     return wrapped_view
 
-#: Add user view will allow user to add multiple user for the application
-#: Added user will be allowed to work on the application simultaneaously
+
+#: add user to to user database.
 @bp.route('/adduser', methods=('GET', 'POST'))
 @login_required
 def adduser():

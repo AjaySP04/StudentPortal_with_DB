@@ -11,18 +11,6 @@ from student_db.student_db import get_db
 from flask import flash
 
 
-# '''
-# 	Process flow:
-# 	Read the file:
-# 		- count = 0
-# 		- if present :
-# 			- count how many records -> count will be used for id
-# 		- else if not present:
-# 			- count = 1
-# 		- open file in write mode and append the id and admin and password
-# '''
-
-
 #: Will get the all user_list
 def list_data_student():
     #: read the data
@@ -52,9 +40,8 @@ def add_data_student(name, age, gender):
         )
         db.commit()
 
+
 #: get the specific student using the id for the student.
-
-
 def get_students(id):
     student = get_db().execute(
         'SELECT id, "S0000" || CAST( id AS TEXT)  AS roll_number, name, age, gender, add_date '
@@ -124,62 +111,3 @@ def search_student(search_string=''):
         list_of_matched_student = students
 
     return list_of_matched_student
-
-
-# def display_student_list(list):
-
-# 	if list == [] :
-# 		#: if nothing found in list.
-# 		print('''
-# 			Sorry :( No record match found...
-# 			''')
-# 	else:
-# 		#: for item in list display all information.
-# 		for item in list:
-# 			print('''
-# 				Name : {}
-# 				Roll Number : {}
-# 				Age : {}
-# 				Gender : {}
-# 			'''.format(item['name'], item['roll_number'], item['age'], item['gender']), end='\n')
-
-
-#: Here we have summarize all the methods with ther uses as they are represented.
-#: These are the methods which can be exported to or imported into data.py for database use.
-def main():
-    # training()
-
-    file = FILE_STUDENTS
-    # training_file(file)
-    target = 'temp/new_student_temp_data.txt'
-
-    #: try to load data to target
-    load_data_student(file, target)
-
-    #: list all Students for index page
-    #student_list = list_data_student(target)
-    # display_student_list(student_list)
-
-    #: dummy user data to create new user
-    name = 'test student'
-    age = 19
-    gender = 'Male'
-    #: Add user to user data target file.
-    #add_data_student(target, name, age, gender)
-
-    #: update/edit student information
-    #update_student_detail(target, roll_number='S00001')
-
-    #: To delete particular student with specified roll number
-    #delete_student(target, roll_number='S00001')
-
-    #: search for student with roll number or name
-    #: this will return list of all match for search pattern.
-    list_of_search = search_student(target, search_string='Stu')
-
-    #: Display all fetched data.
-    display_student_list(list_of_search)
-
-
-# if __name__=='__main__':
-# 	main()

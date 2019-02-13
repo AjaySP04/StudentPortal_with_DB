@@ -27,33 +27,28 @@ def validate_login(username='', password=''):
 def add_user_data(username='test', password='pass'):
     add_user(username, password)
 
+
 #: add student for students table
-
-
 def add_student_data(name='Test Student', age=18, gender='Male'):
     add_data_student(name, age, gender)
 
+
 #: list all student from the databse.
-
-
 def list_student_data():
     return list_data_student()
 
+
 #: update the student details inside the student table
-
-
 def update_student(name='', age=0, gender='', id=0):
     update_student_detail(name, age, gender, id)
 
+
 #: delete the student record for specific id
-
-
 def delete_student_data(id=0):
     delete_student(id)
 
+
 #: search for pattern in the database.
-
-
 def search_student_record(search_string=''):
     return search_student(search_string)
 
