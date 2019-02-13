@@ -37,11 +37,11 @@ of the database use. This uses SQLite database for data management through an RD
 
 1. Setup the flask app and its environment
   a. Linux shell type below command
-    - 'export FLASK_APP=student_nodb'
+    - 'export FLASK_APP=student_db'
     - 'export FLASK_ENV=development' 
     - 'export FLASK_DEBUG=1' OR,
   b. Windows replace "export" with "set" for windows command will be:
-    - 'set FLASK_APP=student_nodb'
+    - 'set FLASK_APP=student_db'
     - 'set FLASK_ENV=development' 
     - 'set FLASK_DEBUG=1'
     
