@@ -51,7 +51,7 @@
                 {% if g.user %} <!-- will use session key to check if user exists in session cookie-->
                   <div class="navbar-nav mr-sm-2">
                     <a class="nav-item nav-link" href="#">
-                    	<span> Welcome {{ g.user['username'] }}</span> <!-- display user greetings-->
+                    	<span> Welcome {{ g.user }}</span> <!-- display user greetings-->
                     </a>
                     <!-- Logout for the user to return to index page. -->
                     <a class="nav-item nav-link" href="{{ url_for('auth.logout') }}">Logout</a>

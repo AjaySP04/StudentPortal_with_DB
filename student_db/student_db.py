@@ -1,3 +1,5 @@
+from flask.cli import with_appcontext
+from flask import current_app, g
 '''
     This module needs to be registered to the initial app to use this database.
 '''
@@ -9,13 +11,11 @@ import click
 '''
     importing neccessary objects for database these special objects are:
     current_app = this handles the flask related requests
-    g - speacial object which is unique to each request 
+    g - speacial object which is unique to each request
 '''
-from flask import current_app, g
 
 
-from flask.cli import with_appcontext
-
+#: get database cursor object.
 
 def get_db():
     if 'db' not in g:
@@ -28,17 +28,21 @@ def get_db():
     return g.db
 
 # close database when not required.
+
+
 def close_db(e=None):
     db = g.pop('db', None)
 
     if db is not None:
         db.close()
 
-# initialze the database 
+# initialze the database
+
+
 def init_db():
     db = get_db()
 
-    # open a file for data 
+    # open a file for data
     with current_app.open_resource('db_schema.sql') as file:
         '''
             read databsse as file data.
@@ -56,6 +60,9 @@ def init_db_command():
     init_db()
     click.echo('Initialized Student Database')
 
+
 def init_app(app):
-    app.teardown_appcontext(close_db) # makes flask to call function while clean up 
-    app.cli.add_command(init_db_command) # add the command into flask <command>
+    # makes flask to call function while clean up
+    app.teardown_appcontext(close_db)
+    # add the command into flask <command>
+    app.cli.add_command(init_db_command)
