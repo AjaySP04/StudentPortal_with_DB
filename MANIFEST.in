@@ -1,4 +1,4 @@
-include flaskr/db_schema.sql
+include student_db/db_schema.sql
 graft student_db/static
 graft student_db/templates
 global-exclude *.pyc
