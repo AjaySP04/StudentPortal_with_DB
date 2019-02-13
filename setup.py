@@ -7,11 +7,11 @@ setup(
     url='https://github.com/AjaySP04/StudentPortal_with_DB',
     author='Ajay Singh Parmar',
     author_email='ajays.parmar04@gmail.com',
-        packages=find_packages(),
-        include_package_data=True,
-        zip_safe=False,
-        install_requires=[
-                'flask',
-                'flask-wtf'
-        ],
+    packages=find_packages(),
+    include_package_data=True,
+    zip_safe=False,
+    install_requires=[
+        'flask',
+        'flask-wtf'
+    ],
 )
