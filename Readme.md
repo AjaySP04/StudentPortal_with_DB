@@ -12,7 +12,7 @@ of the database use. This uses SQLite database for data management through an RD
 2. List all dependencies with command 'pip list'
 - You must see student-db in list like:
 
-* student-db   1.0.0   /home/ajay/Desktop/Projects/NoDatabaseStudentProject/WithDBStudent
+* student-db   1.0.0   /path_to/project_directory/
 
 3. Now you can set/export flask environment (development in this case.). And follow instructions from 'To Run this app in development mode'.
 
