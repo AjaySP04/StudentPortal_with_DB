@@ -23,7 +23,7 @@ Please read this file till the end. This project is part of an in-house assignme
 3. Place the project folder into directory of your virtualenv and activate the virtual env with command as below:
   ```source venv/bin/activate```
   
-4. Now install all the dependencies as are listed in 'requirements.txt'. You need to install `Flask version=1.0.2` and `WTForms version=2.2.1` from flask_wtf (use ```pip install flask && pip install flask_wtf``` )
+4. Now install all the dependencies as are listed in ```requirements.txt```. You need to install `Flask version=1.0.2` and `WTForms version=2.2.1` from flask_wtf (use ```pip install flask && pip install flask_wtf``` )
    
 
 ## To Run this app in development mode.
