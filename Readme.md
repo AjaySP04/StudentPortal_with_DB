@@ -1,6 +1,6 @@
-# Readme for Student Portal Web Application without any Database
+# Readme for Student Portal Web Application with Relational Database(SQLite)
 
-Please read this file till the end. This project is part of an in-house assignment, and also a copy of the already existing Student Portal Application with an only difference of the database usage. This uses light weight SQLite Relational database.
+Please read this file till the end. This project is part of an in-house assignment, and also a copy of the already existing Student Portal Application with an only difference of the database usage. This uses light weight SQLite Relational database and SQL.
 
 ## Install with setup.py
 1. Use python package installer to install the project from current directory for setup.py.
